@@ -1,0 +1,39 @@
+body {
+	background: #adb1b4;
+}
+
+#root {
+	header {
+		position: fixed;
+		top: 0;
+		z-index: 2;
+		div {
+			justify-content: space-between;
+
+			&:first-child > a {
+				margin-right: 30px;
+			}
+			a {
+				white-space: nowrap;
+				text-decoration: none;
+				color: aliceblue;
+				display: flex;
+				flex-wrap: nowrap;
+				align-items: center;
+
+				img {
+					width: 60%;
+				}
+			}
+		}
+	}
+}
+
+.Item-Link {
+	text-decoration: none;
+	color: inherit;
+
+	&:hover {
+		color: #0843c0;
+	}
+}
