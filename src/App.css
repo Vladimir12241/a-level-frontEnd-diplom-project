@@ -1,0 +1,34 @@
+body {
+  background: #adb1b4;
+}
+
+#root header {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+#root header div {
+  justify-content: space-between;
+}
+#root header div:first-child > a {
+  margin-right: 30px;
+}
+#root header div a {
+  white-space: nowrap;
+  text-decoration: none;
+  color: aliceblue;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#root header div a img {
+  width: 60%;
+}
+
+.Item-Link {
+  text-decoration: none;
+  color: inherit;
+}
+.Item-Link:hover {
+  color: #0843c0;
+}/*# sourceMappingURL=App.css.map */
