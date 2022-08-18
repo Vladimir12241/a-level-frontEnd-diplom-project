@@ -1,20 +1,24 @@
 import { connect } from "react-redux";
+import { URL } from "../../data/dataGQL";
 import { actionAuthLogout } from "../../data/reducers";
 import { actionGeIncomeMessages } from "../../data/DataActions";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, IconButton, Badge, MenuItem, Menu } from "@mui/material";
+import { Box, IconButton, Badge, MenuItem, Menu, Avatar } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import LogoutIcon from "@mui/icons-material/Logout";
 import SearchBar from "./SearchBar";
 import { useEffect } from "react";
 
-const IsUser = ({ login, newMessages, onLogout, onIncomes, myId, badges }) => {
+const IsUser = ({ login, avatar, newMessages, onLogout, onIncomes, myId, badges }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 	const [badge, setBadge] = useState(0);
+	const [thisAvatar, setThisAvatar] = useState();
+	const [thisLogin, setThisLogin] = useState();
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -34,6 +38,18 @@ const IsUser = ({ login, newMessages, onLogout, onIncomes, myId, badges }) => {
 			clearInterval(messageReFresh);
 		};
 	}, []);
+
+	useEffect(() => {
+		if (avatar) {
+			setThisAvatar(avatar);
+		}
+	}, [avatar]);
+
+	useEffect(() => {
+		if (login) {
+			setThisLogin(login);
+		}
+	}, [login]);
 
 	useEffect(() => {
 		if (badges || badges === 0) {
@@ -75,16 +91,26 @@ const IsUser = ({ login, newMessages, onLogout, onIncomes, myId, badges }) => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>
-				<Link to={"/profile"}>{login}</Link>
-			</MenuItem>
+			<Link to={"/profile"} style={{ textDecoration: "none", color: "inherit" }}>
+				<MenuItem onClick={handleMenuClose}>
+					{thisAvatar !== undefined ? (
+						<Avatar alt={login} src={`${URL}${thisAvatar}`} fontSize="small" sx={{ mr: 1 }} />
+					) : (
+						<Avatar fontSize="small" sx={{ mr: 1 }}>
+							{thisLogin && thisLogin[0]}
+						</Avatar>
+					)}
+					<p>{thisLogin}</p>
+				</MenuItem>
+			</Link>
 			<MenuItem
 				onClick={() => {
 					onLogout();
 					handleMenuClose();
 				}}
 			>
-				logout
+				<LogoutIcon fontSize="small" sx={{ mr: 1 }} />
+				<p>Logout</p>
 			</MenuItem>
 		</Menu>
 	);
@@ -191,6 +217,7 @@ const IsUser = ({ login, newMessages, onLogout, onIncomes, myId, badges }) => {
 const CIsUser = connect(
 	(state) => ({
 		login: state.userInfo?.payload?.login,
+		avatar: state.userInfo?.payload?.avatar?.url,
 		myId: state.userInfo?.payload?._id,
 		badges: state.promise?.newMessagesCount?.payload,
 	}),

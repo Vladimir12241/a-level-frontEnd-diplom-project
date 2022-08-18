@@ -12,7 +12,13 @@ const DashItem = ({ ad: { _id, images, price, tags, title } }) => {
 		<Card sx={{ width: "100%", maxWidth: { xs: "420px" }, minHeight: "320px" }}>
 			{isImages && (
 				<Link to={`/dashboard/${_id}`}>
-					<CardMedia component="img" height="140" src={`${URL}${images[0].url}`} alt={title} />
+					<CardMedia
+						component="img"
+						height="140"
+						src={`${URL}${images[0].url}`}
+						alt={title}
+						sx={{ width: "75%", position: "relative", margin: "0 auto" }}
+					/>
 				</Link>
 			)}
 			<CardContent>
