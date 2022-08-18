@@ -1,7 +1,6 @@
 {
   "name": "diplom-projekt",
   "version": "0.1.0",
-  "homepage": "https://vladimir12241.github.io/kypi-prodai",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -13,7 +12,6 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "heroku": "^7.62.0",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.0",
@@ -31,10 +29,7 @@
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
- 
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "npx gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
